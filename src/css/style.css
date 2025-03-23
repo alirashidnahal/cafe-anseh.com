@@ -11,11 +11,10 @@
    Base styles: opinionated defaults
    ========================================================================== */
 @font-face {
-    font-family: Ironclad;
+    font-family: 'Ironclad';
+    font-style: normal;
+    font-weight: 400;
     src: url('../fonts/Ironclad-bold.otf');
-    font-weight: bold;
-    font-style: auto;
-    font-display: auto;
 }
 
 html {
