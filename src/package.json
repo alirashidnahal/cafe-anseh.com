@@ -1,0 +1,26 @@
+{
+  "name": "cafe_anseh",
+  "version": "1.0",
+  "description": "This is a Modal Restaurant Template designed and developed by Ali Rashidnahal at the request of Ms. Reyhaneh Zarrini for Anseh Confectionery Cafe.",
+  "private": true,
+  "keywords": [
+    "Cafe",
+    "Menu",
+    "Resturant"
+  ],
+  "license": "GNU General Public License v3.0",
+  "author": "Ali Rashidnahal",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve --open --config webpack.config.dev.js",
+    "build": "webpack --config webpack.config.prod.js"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^11.0.0",
+    "html-webpack-plugin": "^5.6.0",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4",
+    "webpack-merge": "^5.10.0"
+  }
+}
