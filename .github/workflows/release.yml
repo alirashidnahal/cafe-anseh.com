@@ -34,10 +34,18 @@ jobs:
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
           echo "ZIP_NAME=release-$NEW_VERSION.zip" >> $GITHUB_ENV
 
+#      - name: Prepare Release Message
+#        id: prepare_release_message
+#        run: |
+#          sed "s|RELEASE_TAG|${{ env.NEW_VERSION }}" ./.github/release_message.md > release.md && sed -i "s|CHANGE_LOG|${{ env.COMMIT_MESSAGES }}" release.md
+
       - name: Prepare Release Message
         id: prepare_release_message
         run: |
-          sed "s|RELEASE_TAG|${{ env.NEW_VERSION }}" ./.github/release_message.md > release.md && sed -i "s|CHANGE_LOG|${{ env.COMMIT_MESSAGES }}" release.md
+          envsubst < ./.github/release_message.md > release.md
+        env:
+          NEW_VERSION: ${{ env.NEW_VERSION }}
+          COMMIT_MESSAGES: ${{ env.COMMIT_MESSAGES }}
 
       - name: Create Tag
         run: |
