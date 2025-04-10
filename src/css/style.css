@@ -27,6 +27,7 @@
 
 :dir(rtl) {
     font-family: yekan, serif;
+    letter-spacing: 0;
 }
 
 html {
