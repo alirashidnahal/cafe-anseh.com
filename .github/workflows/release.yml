@@ -11,7 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       
@@ -37,7 +37,7 @@ jobs:
       - name: Prepare Release Message
         id: prepare_release_message
         run: |
-          sed "s|RELEASE_TAG|${{ env.NEW_VERSION }}|g" ./.github/release_message.md > release.md && sed -i "s|CHANGE_LOG|${{ env.COMMIT_MESSAGES }}|g" release.md
+          sed "s|RELEASE_TAG|${{ env.NEW_VERSION }}" ./.github/release_message.md > release.md && sed -i "s|CHANGE_LOG|${{ env.COMMIT_MESSAGES }}" release.md
 
       - name: Create Tag
         run: |
@@ -66,7 +66,7 @@ jobs:
       
       - name: Publish
         id: create_release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.NEW_VERSION }}
           files: ${{ env.ZIP_NAME }}
