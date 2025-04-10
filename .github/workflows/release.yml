@@ -42,7 +42,7 @@ jobs:
       - name: Prepare Release Message
         id: prepare_release_message
         run: |
-          envsubst < ./.github/release_message.md > release.md
+          awk -v new_ver="$NEW_VERSION" -v changes="$COMMIT_MESSAGES" '{gsub(/RELEASE_TAG/, new_ver); gsub(/CHANGE_LOG/, changes);print}' ./.github/release_message.md > release.md
         env:
           NEW_VERSION: ${{ env.NEW_VERSION }}
           COMMIT_MESSAGES: ${{ env.COMMIT_MESSAGES }}
