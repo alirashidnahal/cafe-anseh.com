@@ -18,9 +18,9 @@ jobs:
       - name: Get Commit Messages
         id: get_commits
         run: |
-          git log --pretty=format:"- %s" $(git describe --tags --abbrev=0 2>/dev/null || git rev-list --max-parents=0 HEAD)..HEAD > commit_messages.txt
+          COMMIT_MESSAGES=$(git log --pretty=format:"- %s" $(git describe --tags --abbrev=0 2>/dev/null || git rev-list --max-parents=0 HEAD)..HEAD)
           echo "COMMIT_MESSAGES<<EOF" >> $GITHUB_ENV
-          cat commit_messages.txt >> $GITHUB_ENV
+          echo "$COMMIT_MESSAGES" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
       
       - name: Publish
