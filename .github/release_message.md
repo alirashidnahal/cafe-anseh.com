@@ -3,7 +3,7 @@
 ### Some software changes:
 
 - [x] Fixed some minor bugs
-CHANGE-LOG
+CHANGE_LOG
 
 #### To report issues or provide suggestions:
 
