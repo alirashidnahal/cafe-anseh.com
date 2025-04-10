@@ -1,22 +1,9 @@
-<div dir="rtl">
-
-## نسخه پیش‌ازانتشار RELEASE_TAG منتشر شد.
-
-### برخی‌از تغییرات برنامه:
-
-- [x] رفع برخی‌از اشکالات جزئی
-
-#### گزارش مشکل یا ارائه پیشنهاد:
-
-https://github.com/alirashidnahal/cafe-anseh.com/issues
-
-</div>
-
 ## Pre-release RELEASE_TAG has been released.
 
 ### Some software changes:
 
 - [x] Fixed some minor bugs
+CHANGE-LOG
 
 #### To report issues or provide suggestions:
 
