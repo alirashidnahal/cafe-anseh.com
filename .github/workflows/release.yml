@@ -23,10 +23,28 @@ jobs:
           echo "$COMMIT_MESSAGES" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
       
+      - name: Get Next Version
+        id: get_version
+        run: |
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          VERSION=${LATEST_TAG#v}
+          IFS='.' read -r major minor patch <<< "$VERSION"
+          NEW_PATCH=$((patch + 1))
+          NEW_VERSION="v$major.$minor.$NEW_PATCH"
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+      
+      - name: Create Tag
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git tag -a ${{ env.NEW_VERSION }} -m "Release ${{ env.NEW_VERSION }}"
+          git push origin ${{ env.NEW_VERSION }}
+      
       - name: Publish
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{ env.NEW_VERSION }}
           files: |
             src/css/**
             src/fonts/**
