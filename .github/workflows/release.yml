@@ -1,0 +1,46 @@
+name: Publish
+
+permissions: write-all
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Get Commit Messages
+        id: get_commits
+        run: |
+          git log --pretty=format:"- %s" $(git describe --tags --abbrev=0 2>/dev/null || git rev-list --max-parents=0 HEAD)..HEAD > commit_messages.txt
+          echo "COMMIT_MESSAGES<<EOF" >> $GITHUB_ENV
+          cat commit_messages.txt >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+      
+      - name: Publish
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            src/css/**
+            src/fonts/**
+            src/img/**
+            src/js/**
+            src/404.html
+            src/en.html
+            src/favicon.ico
+            src/index.html
+            src/manifest.json
+            src/robots.txt
+            LICENSE
+          body: |
+            تغییرات در این نسخه:
+            ${{ env.COMMIT_MESSAGES }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
