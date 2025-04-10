@@ -37,7 +37,7 @@ jobs:
       - name: Prepare Release Message
         id: prepare_release_message
         run: |
-          sed -e "s#RELEASE_TAG#${{ env.NEW_VERSION }}#g" -e "s|CHANGE_LOG|${{ env.COMMIT_MESSAGES }}|g" ./.github/release_message.md > release.md
+          sed "s|RELEASE_TAG|${{ env.NEW_VERSION }}|g" ./.github/release_message.md > release.md && sed -i "s|CHANGE_LOG|${{ env.COMMIT_MESSAGES }}|g" release.md
 
       - name: Create Tag
         run: |
