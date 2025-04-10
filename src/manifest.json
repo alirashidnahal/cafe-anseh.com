@@ -3,18 +3,18 @@
   "short_name": "Anseh",
   "name": "Cafe Anseh",
   "description": "Cafe Anseh has based its work and activities on this axis to provide all lovers of this drink with its various and diverse varieties, freshly roasted and freshly ground.",
-  "dir": "ltr",
-  "lang": "en",
+  "dir": "rtl",
+  "lang": "fa",
   "start_url": "/?utm_source=home",
   "display": "standalone",
   "background_color": "#fafafa",
   "theme_color": "#fafafa",
   "orientation": "portrait-primary",
-  "categories": ["business", "education", "utilities"],
+  "categories": ["business", "utilities"],
   "author": "Ali Rashidnahal",
   "icons": [{
-    "src": "icon.png",
+    "src": "https://cafe-anseh.com/img/icon.png",
     "type": "image/png",
     "sizes": "192x192"
-  }],
+  }]
 }
