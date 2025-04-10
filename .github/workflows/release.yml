@@ -1,6 +1,8 @@
 name: Publish
 
-permissions: write-all
+permissions:
+  contents: write
+  actions: read
 
 on:
   push:
@@ -11,7 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
       
@@ -33,11 +35,6 @@ jobs:
           NEW_VERSION="v$major.$minor.$NEW_PATCH"
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
           echo "ZIP_NAME=release-$NEW_VERSION.zip" >> $GITHUB_ENV
-
-#      - name: Prepare Release Message
-#        id: prepare_release_message
-#        run: |
-#          sed "s|RELEASE_TAG|${{ env.NEW_VERSION }}" ./.github/release_message.md > release.md && sed -i "s|CHANGE_LOG|${{ env.COMMIT_MESSAGES }}" release.md
 
       - name: Prepare Release Message
         id: prepare_release_message
@@ -80,8 +77,5 @@ jobs:
           files: ${{ env.ZIP_NAME }}
           body_path: './release.md'
           draft: true
-#          body: |
-#            تغییرات در این نسخه:
-#            ${{ env.COMMIT_MESSAGES }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
