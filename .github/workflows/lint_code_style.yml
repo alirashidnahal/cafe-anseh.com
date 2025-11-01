@@ -1,4 +1,4 @@
-name: Fix Code Style with Laravel Pint (lint)
+name: Fix Code Style with Laravel Pint and Prettier
 
 on:
   workflow_dispatch:
@@ -45,3 +45,33 @@ jobs:
           commit_user_email: "github-actions[bot]@users.noreply.github.com"
           commit_author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
           skip_dirty_check: false
+
+  prettier:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install NPM dependencies
+        run: npm ci
+
+      - name: Run Prettier
+        run: npm run format
+
+      - name: Generate commit timestamp
+        id: timestamp
+        run: echo "CURRENT_TIMESTAMP=$(TZ='Asia/Tehran' date +'%Y%m%d-%H%M')" >> $GITHUB_ENV
+
+      - name: Commit prettier changes
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: "Apply Prettier code style fixes at ${{ env.CURRENT_TIMESTAMP }}"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
+          commit_author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+          skip_dirty_check: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
