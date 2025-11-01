@@ -1,0 +1,47 @@
+name: Fix Code Style with Laravel Pint (lint)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - develop
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [ 8.4 ]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: pint
+
+      - name: Run Pint
+        run: pint
+
+      - name: Generate commit timestamp
+        id: timestamp
+        run: echo "CURRENT_TIMESTAMP=$(TZ='Asia/Tehran' date +'%Y%m%d-%H%M')" >> $GITHUB_ENV
+
+      - name: Commit linted files
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: "Apply Laravel Pint code style fixes at ${{ env.CURRENT_TIMESTAMP }}"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
+          commit_author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+          skip_dirty_check: false
