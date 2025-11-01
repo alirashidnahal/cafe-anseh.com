@@ -1,0 +1,19 @@
+{
+  "name": "cafe_anseh",
+  "version": "1.0",
+  "description": "This is a Modal Restaurant Template designed and developed by Ali Rashidnahal at the request of Ms. Reyhaneh Zarrini for Anseh Confectionery Cafe.",
+  "private": true,
+  "keywords": [
+    "Cafe",
+    "Menu",
+    "Resturant"
+  ],
+  "license": "GNU General Public License v3.0",
+  "author": "Ali Rashidnahal",
+  "scripts": {
+    "format": "prettier --write 'src/*.{css,js,vue}'"
+  },
+  "devDependencies": {
+    "prettier": "3.6.2"
+  }
+}
